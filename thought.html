@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Wall — Thought</title>
+  <link rel="stylesheet" href="thought.css" />
+</head>
+<body>
+  <!-- AMBIENT BACKGROUND -->
+  <div class="ambient" aria-hidden="true">
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- SITE HEADER -->
+  <header class="site-head">
+    <a href="feed.html" class="back-link">← Back to Wall</a>
+    <a href="feed.html" class="logo">THE WALL<span class="dot">.</span></a>
+    <a href="post.html" class="nav__post">+ Post</a>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="page page--narrow">
+    
+    <!-- MAIN THOUGHT CARD -->
+    <article class="thought-card">
+      <div class="thought-card__head">
+        <div class="anon">
+          <span>🌙 Anonymous</span> <b>#4821</b>
+        </div>
+        <span class="tag">Rant</span>
+      </div>
+
+      <p class="thought-card__text">"I genuinely hate when someone says 'we need to talk' and refuses to say what it's about. Just say it. I've already imagined 14 worse versions."</p>
+
+      <div class="thought-card__foot">
+        <time class="thought-card__time">Posted 2 hours ago</time>
+
+        <!-- REACTION BAR IN THOUGHT CARD -->
+        <div class="react-group" id="thought-reactions">
+          <button class="react-btn" data-reaction="felt">
+            <span class="emoji">💜</span> <span class="count">42</span> 
+          </button>
+          <button class="react-btn" data-reaction="real">
+            <span class="emoji">🙂</span> <span class="count">18</span> 
+          </button>
+          <button class="react-btn" data-reaction="mindblown">
+            <span class="emoji">💀</span> <span class="count">9</span>
+          </button>
+          <button class="react-btn" data-reaction="relatable">
+            <span class="emoji">👀</span> <span class="count">15</span>
+          </button>
+          <button class="react-btn" data-reaction="deep">
+            <span class="emoji">😭</span> <span class="count">6</span>
+          </button>
+          <button class="react-btn" data-reaction="funny">
+            <span class="emoji">😂</span> <span class="count">18</span> 
+          </button>
+          <button class="react-btn" data-reaction="sympathy">
+            <span class="emoji">🫂</span> <span class="count">18</span> 
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ECHOES SECTION -->
+    <section class="echoes-section">
+      <div class="echoes-header">
+        <h2 class="echoes-title">Echoes <span>(12)</span></h2>
+        <span class="echoes-sort">Sorted by Oldest First</span>
+      </div>
+
+      <!-- INPUT BOX -->
+      <div class="comment-box">
+        <div class="comment-box__meta">Replying as <b>Anonymous #9031</b></div>
+        <textarea class="field" placeholder="Leave an Echo on this thought..." maxlength="500"></textarea>
+        <div class="comment-box__row">
+          <span class="counter">0 / 500</span>
+          <button class="btn--submit" type="button">Put Echo on Wall</button>
+        </div>
+      </div>
+
+      <!-- ECHOES LIST -->
+      <ul class="echo-list">
+        <li class="echo-card">
+          <div class="echo-card__head">
+            <span>⚡ Anonymous #7291</span>
+            <time>1h ago</time>
+          </div>
+          <p class="echo-card__text">My boss did this on a Friday afternoon at 4:55 PM once. Weekend completely ruined for no reason.</p>
+          <div class="echo-card__foot">
+            <button class="react-btn react-btn--sm"><span class="emoji">💜</span> <span class="count">14</span></button>
+          </div>
+        </li>
+
+        <li class="echo-card echo-card--op">
+          <div class="echo-card__head">
+            <span>🌙 Anonymous #4821 <b class="op-badge">OP</b></span>
+            <time>45m ago</time>
+          </div>
+          <p class="echo-card__text">That should literally be against labor laws 😭</p>
+          <div class="echo-card__foot">
+            <button class="react-btn react-btn--sm"><span class="emoji">💜</span> <span class="count">8</span></button>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <script src="thought.js"></script>
+</body>
+</html>
