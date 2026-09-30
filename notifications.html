@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Wall - Notifications & Activity</title>
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .notif-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.2s, border-color 0.2s;
+      position: relative;
+    }
+    .notif-card.is-unread {
+      background: rgba(124, 58, 237, 0.08);
+      border-color: rgba(124, 58, 237, 0.3);
+    }
+    .notif-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .notif-card.is-unread .notif-icon {
+      background: rgba(124, 58, 237, 0.2);
+    }
+    .unread-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #a855f7;
+      position: absolute;
+      top: 18px;
+      right: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="top-bar__inner">
+      <a href="index.html" class="top-bar__logo">THE WALL.</a>
+      <nav class="top-bar__nav">
+        <a href="index.html" class="nav-link">Feed</a>
+        <a href="post.html" class="nav-link">Post</a>
+        <a href="circle.html" class="nav-link">Circle</a>
+        <a href="messages.html" class="nav-link">Messages</a>
+        <a href="notifications.html" class="nav-link is-active">
+          Alerts <span id="navUnreadBadge" style="display: none; background: #a855f7; color: #fff; font-size: 0.72rem; padding: 2px 6px; border-radius: 10px; font-weight: 700; margin-left: 2px;">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="layout" style="max-width: 680px; margin: 40px auto; padding: 0 20px;">
+
+    <header style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+      <div>
+        <h1 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 6px;">Activity Alerts</h1>
+        <p style="color: var(--text-muted, #888); font-size: 0.95rem;">
+          Stay updated on Cross Paths requests, echoes, and interactions.
+        </p>
+      </div>
+      <button id="markReadBtn" class="btn-action btn-action--secondary" style="font-size: 0.82rem; padding: 8px 14px;">
+        Mark all as read
+      </button>
+    </header>
+
+    <!-- Filter Toggle Bar -->
+    <div class="filter-bar" style="margin-bottom: 20px;">
+      <button type="button" class="filter is-active" data-filter="all">All</button>
+      <button type="button" class="filter" data-filter="unread">Unread</button>
+    </div>
+
+    <!-- Notifications Stream Container -->
+    <div id="notificationsContainer" style="display: flex; flex-direction: column; gap: 12px;">
+      <!-- Populated dynamically via JS -->
+    </div>
+
+  </main>
+
+  <script src="state.js"></script>
+  <script src="notifications.js"></script>
+</body>
+</html>

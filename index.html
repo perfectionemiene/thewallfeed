@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Wall - Feed</title>
+  <link rel="stylesheet" href="feed.css">
+  <link rel="stylesheet" href="css/circle-theme.css">
+</head>
+<body class="feed-body">
+
+  <!-- Ambient Animated Gradient Background -->
+  <div class="ambient" aria-hidden="true">
+    <span></span>
+    <span></span>
+  </div>
+
+  <a href="#main" class="skip">Skip to main content</a>
+
+  <!-- SITE HEADER / NAV (UPDATED FOR PROTOTYPE NAV BAR) -->
+  <header class="site-head">
+    <a href="index.html" class="logo">THE WALL<span class="dot">.</span></a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="index.html" aria-current="page" class="is-active">Feed</a>
+      <a href="circle.html" class="nav__link">Circle</a>
+      <a href="messages.html" class="nav__link">
+        Messages <span id="msgBadge" class="nav-badge" style="display:none;">0</span>
+      </a>
+      <a href="notifications.html" class="nav__link">
+        Notifs <span id="notifBadge" class="nav-badge" style="display:none;">0</span>
+      </a>
+      <a href="post.html" class="nav__post">+ Post</a>
+    </nav>
+  </header>
+
+  <!-- MAIN FEED CONTENT -->
+  <main id="main" class="page page--narrow">
+    
+    <!-- FEED HERO HEADER -->
+    <header class="feed-head">
+      <div class="eyebrow">Every post exists on its own.</div>
+      <h1 class="feed-head__title">What’s being said?</h1>
+      <p class="feed-head__sub">No names. No profiles. Just complete anonymity.</p>
+
+      <!-- LIVE AMBIENT PULSE -->
+      <div class="live-pulse">
+        <span class="pulse-dot"></span>
+        <span class="pulse-text">142 people wandering The Wall right now · 38 Echoes added this hour</span>
+      </div>
+    </header>
+
+    <!-- FEED CONTROLS (CATEGORIES + SORTING & DISCOVERY) -->
+    <section class="controls" aria-label="Feed Controls">
+      
+      <!-- CATEGORY TABS -->
+      <div class="filters" role="tablist" aria-label="Filter posts by category">
+        <button class="filter" role="tab" aria-selected="true" data-filter="all">All</button>
+        <button class="filter" role="tab" aria-selected="false" data-filter="Rant">Rants</button>
+        <button class="filter" role="tab" aria-selected="false" data-filter="Hot Take">Hot Takes</button>
+        <button class="filter" role="tab" aria-selected="false" data-filter="Confession">Confessions</button>
+        <button class="filter" role="tab" aria-selected="false" data-filter="Random">Random</button>
+      </div>
+
+      <!-- SORTING & RANDOM DISCOVERY BAR -->
+      <div class="feed-subcontrols">
+        <div class="sort-wrapper">
+          <label for="feedSort" class="sort-label">Sort by:</label>
+          <select id="feedSort" class="sort-select">
+            <option value="latest">Latest</option>
+            <option value="trending">🔥 Trending</option>
+            <option value="rising">↗ Rising</option>
+            <option value="discussed">💬 Most Discussed</option>
+          </select>
+        </div>
+
+        <!-- SIGNATURE DISCOVERY BUTTON -->
+        <button class="random-discover-btn" id="showMeSomethingBtn">
+          🎲 Surprise me
+        </button>
+      </div>
+
+      <div class="filter-line" id="filterStatus">Showing all thoughts</div>
+    </section>
+
+    <!-- POSTS STREAM -->
+    <section class="stream" id="postsContainer" aria-label="Post stream">
+      <!-- Dynamic Posts Rendered Here via feed.js -->
+    </section>
+
+    <!-- END OF FEED SECTION -->
+    <div class="wall-end">
+      <div class="wall-end__eyebrow">Got something on your mind?</div>
+      <h2 class="wall-end__title">Put it on The Wall.</h2>
+      <a href="post.html" class="btn btn--primary btn--lg">Put It On The Wall</a>
+    </div>
+
+  </main>
+
+  <!-- FLOATING ACTION BUTTON FOR MOBILE -->
+  <a href="post.html" class="btn btn--primary fab" aria-label="Put a new thought on the wall">
+    <span>+ Post</span>
+  </a>
+
+  <!-- FOOTER -->
+  <footer class="site-foot">
+    <ul class="foot-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#guidelines">Community Guidelines</a></li>
+      <li><a href="#privacy">Privacy</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p>The Wall. No profiles. No followers. No social status.</p>
+  </footer>
+
+  <!-- FLOATING DEV USER SWITCHER -->
+  <div id="dev-switcher" style="position: fixed; bottom: 12px; left: 12px; z-index: 9999; background: #181524; border: 1px solid rgba(247,244,238,0.2); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; color: #fff; display: flex; align-items: center; gap: 8px;">
+    <span>Testing as:</span>
+    <select id="devUserSelect" onchange="WallAPI.switchUser(this.value)" style="background: transparent; color: #9355FF; border: none; font-weight: bold; cursor: pointer; outline: none;">
+    </select>
+  </div>
+
+  <script src="state.js"></script>
+  <script src="feed.js"></script>
+  <script>
+    // Initialize Dev Switcher & Nav Badges
+    document.addEventListener("DOMContentLoaded", () => {
+      const select = document.getElementById("devUserSelect");
+      if (select && window.WallAPI) {
+        const current = WallAPI.getCurrentUser();
+        WallAPI.data.devUsers.forEach(u => {
+          const opt = document.createElement("option");
+          opt.value = u.id;
+          opt.textContent = `${u.label} #${u.code}`;
+          if (u.id === current.id) opt.selected = true;
+          select.appendChild(opt);
+        });
+      }
+
+      // Sync Notifications badge count from state.js
+      if (window.WallAPI) {
+        const unreadNotifs = WallAPI.data.notifications.filter(n => !n.read).length;
+        const notifBadge = document.getElementById("notifBadge");
+        if (notifBadge && unreadNotifs > 0) {
+          notifBadge.textContent = unreadNotifs;
+          notifBadge.style.display = "inline-block";
+        }
+      }
+    });
+  </script>
+</body>
+</html>

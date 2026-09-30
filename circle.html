@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inner Circle & Cross Paths</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="top-bar__inner">
+      <a href="index.html" class="top-bar__logo">THE WALL.</a>
+      <nav class="top-bar__nav">
+        <a href="index.html" class="nav-link">Feed</a>
+        <a href="post.html" class="nav-link">Post</a>
+        <a href="circle.html" class="nav-link is-active">Circle</a>
+        <a href="messages.html" class="nav-link">Messages</a>
+        <a href="notifications.html" class="nav-link">Alerts</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="layout" style="max-width: 720px; margin: 40px auto; padding: 0 20px;">
+
+    <header style="margin-bottom: 28px;">
+      <h1 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 6px;">Inner Circle</h1>
+      <p style="color: var(--text-muted, #888); font-size: 0.95rem;">
+        Manage your anonymous connections and incoming Cross Paths requests.
+      </p>
+    </header>
+
+    <!-- Section 1: Pending Cross Paths Requests -->
+    <section style="margin-bottom: 36px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+        <h2 style="font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted, #aaa);">
+          ⚡ Pending Requests <span id="pendingCountBadge" style="font-size: 0.85rem; color: #a855f7;">(0)</span>
+        </h2>
+      </div>
+
+      <div id="requestsContainer" style="display: flex; flex-direction: column; gap: 12px;">
+        <!-- Dynamic request cards populated via JS -->
+      </div>
+    </section>
+
+    <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 32px 0;">
+
+    <!-- Section 2: Active Inner Circle Connections -->
+    <section>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+        <h2 style="font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted, #aaa);">
+          💜 Connected Inner Circle
+        </h2>
+      </div>
+
+      <div id="circleContainer" style="display: flex; flex-direction: column; gap: 12px;">
+        <!-- Dynamic connection cards populated via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <script src="state.js"></script>
+  <script src="circle.js"></script>
+</body>
+</html>

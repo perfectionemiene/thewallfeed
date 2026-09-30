@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Wall - Messages</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .chat-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 16px;
+      height: calc(100vh - 120px);
+      min-height: 500px;
+    }
+    .conversation-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow-y: auto;
+    }
+    .conversation-item {
+      padding: 12px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .conversation-item:hover, .conversation-item.is-active {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+    .chat-window {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .chat-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chat-body {
+      flex: 1;
+      padding: 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .msg-bubble {
+      max-width: 75%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      line-height: 1.45;
+      word-break: break-word;
+    }
+    .msg-bubble--outgoing {
+      align-self: flex-end;
+      background: #7c3aed;
+      color: #fff;
+      border-bottom-right-radius: 2px;
+    }
+    .msg-bubble--incoming {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.08);
+      color: #eee;
+      border-bottom-left-radius: 2px;
+    }
+    .chat-footer {
+      padding: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      gap: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .chat-layout {
+        grid-template-columns: 1fr;
+      }
+      .chat-layout.has-active .conversation-list {
+        display: none;
+      }
+      .chat-layout:not(.has-active) .chat-window {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="top-bar__inner">
+      <a href="index.html" class="top-bar__logo">THE WALL.</a>
+      <nav class="top-bar__nav">
+        <a href="index.html" class="nav-link">Feed</a>
+        <a href="post.html" class="nav-link">Post</a>
+        <a href="circle.html" class="nav-link">Circle</a>
+        <a href="messages.html" class="nav-link is-active">Messages</a>
+        <a href="notifications.html" class="nav-link">Alerts</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="layout" style="max-width: 900px; margin: 24px auto; padding: 0 16px;">
+    
+    <div id="chatLayout" class="chat-layout">
+      
+      <!-- Left Column: Conversations List -->
+      <aside class="conversation-list">
+        <div style="font-weight: 700; font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted, #888); margin-bottom: 6px; padding: 0 4px;">
+          Inner Circle Chats
+        </div>
+        <div id="threadsContainer" style="display: flex; flex-direction: column; gap: 8px;">
+          <!-- Rendered via JS -->
+        </div>
+      </aside>
+
+      <!-- Right Column: Chat Window -->
+      <section class="card chat-window">
+        
+        <header class="chat-header">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <button id="backToListBtn" class="btn-action btn-action--secondary" style="display: none; padding: 4px 8px; font-size: 0.8rem;">
+              ← Back
+            </button>
+            <div id="activePartnerMeta" style="font-weight: 700; font-size: 1rem;">
+              Select a conversation
+            </div>
+          </div>
+        </header>
+
+        <div id="chatBody" class="chat-body">
+          <div style="text-align: center; color: var(--text-muted, #888); margin: auto; font-size: 0.9rem;">
+            Choose a thread from the list to start messaging.
+          </div>
+        </div>
+
+        <form id="messageForm" class="chat-footer">
+          <input 
+            type="text" 
+            id="messageInput" 
+            class="field" 
+            placeholder="Type an anonymous message..." 
+            style="flex: 1;" 
+            disabled 
+            required
+          >
+          <button type="submit" id="sendBtn" class="btn-action" disabled>
+            Send ↵
+          </button>
+        </form>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <script src="js/state.js"></script>
+  <script src="js/messages.js"></script>
+</body>
+</html>

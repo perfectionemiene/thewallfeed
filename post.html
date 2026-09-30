@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post a Thought</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="top-bar__inner">
+      <a href="index.html" class="top-bar__logo">THE WALL.</a>
+      <nav class="top-bar__nav">
+        <a href="index.html" class="nav-link">Feed</a>
+        <a href="post.html" class="nav-link is-active">Post</a>
+        <a href="circle.html" class="nav-link">Circle</a>
+        <a href="messages.html" class="nav-link">Messages</a>
+        <a href="notifications.html" class="nav-link">Alerts</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="layout" style="max-width: 680px; margin: 40px auto; padding: 0 20px;">
+
+    <header style="margin-bottom: 24px;">
+      <h1 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 6px;">Share a Thought</h1>
+      <p style="color: var(--text-muted, #888); font-size: 0.95rem;">
+        Speak into the void. Your post will be completely anonymous.
+      </p>
+    </header>
+
+    <form id="postForm" class="card" style="display: flex; flex-direction: column; gap: 20px; padding: 24px;">
+      
+      <!-- Posting As Identifier -->
+      <div id="postingAsMeta" style="font-size: 0.88rem; color: var(--text-muted, #888); border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+        Posting as <b>🪻 Anonymous #7294</b>
+      </div>
+
+      <!-- Tag Selector -->
+      <div>
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; color: var(--text-muted, #aaa);">
+          Select Category Tag
+        </label>
+        <div class="filter-bar" style="margin-bottom: 0;">
+          <button type="button" class="filter is-active" data-tag="Rant">Rant</button>
+          <button type="button" class="filter" data-tag="Hot Take">Hot Take</button>
+          <button type="button" class="filter" data-tag="Confession">Confession</button>
+          <button type="button" class="filter" data-tag="Random">Random</button>
+        </div>
+      </div>
+
+      <!-- Main Text Area -->
+      <div>
+        <label for="thoughtText" style="display: block; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; color: var(--text-muted, #aaa);">
+          Your Thought
+        </label>
+        <textarea 
+          id="thoughtText" 
+          class="field" 
+          rows="6" 
+          placeholder="What's weighing on your mind right now?" 
+          maxlength="500" 
+          style="width: 100%; resize: vertical; min-height: 140px; font-size: 1rem; line-height: 1.5; padding: 14px;"
+          required
+        ></textarea>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+          <span id="charWarning" style="color: #e74c3c; font-size: 0.82rem; display: none;">Character limit reached!</span>
+          <span id="charCounter" style="margin-left: auto; font-size: 0.82rem; color: var(--text-muted, #888);">0 / 500</span>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px;">
+        <a href="feed.html" class="btn-action btn-action--secondary" style="text-decoration: none;">Cancel</a>
+        <button type="submit" id="submitPostBtn" class="btn-action" style="padding: 10px 24px;">
+          Post Thought ⚡
+        </button>
+      </div>
+
+    </form>
+
+  </main>
+
+  <script src="state.js"></script>
+  <script src="post.js"></script>
+</body>
+</html>
